@@ -32,5 +32,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "mobx": "^5.13.0",
+    "mobx-react": "^6.1.3"
   }
 }
