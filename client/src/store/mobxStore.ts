@@ -2,6 +2,28 @@ import {observable, action, computed} from 'mobx';
 
 import {userInfo, userList, userMessageMap} from '../mock';
 
+export interface IUserMessageMap { 
+    [id: string]: IUserMessageItem
+}
+
+export interface IUserMessageItem { 
+    targetInfo: UserProps;
+    list: Array<{
+        target: string;
+        time: string,
+        text: string
+    }>
+}
+
+export interface IMobxStore {
+    currentUser: UserProps,
+    userMessageMap: IUserMessageMap,
+    user: UserProps,
+    filterUserList: Array<UserProps>,
+    changeSearchKey: Function,
+    selectCurrentUser: Function,
+    sendMessage: Function
+}
 
 const DEFAULT_USER:UserProps = {
     id: '',
@@ -9,7 +31,7 @@ const DEFAULT_USER:UserProps = {
     avatar: ''
 }
 
-class Store {
+export class mobxStore implements IMobxStore {
     @observable 
     user:UserProps = userInfo || DEFAULT_USER;
     
@@ -17,7 +39,7 @@ class Store {
     userList:Array<UserProps> = userList;
 
     @observable 
-    userMessageMap:any = userMessageMap;
+    userMessageMap:IUserMessageMap = userMessageMap;
 
     @observable
     searchKeyword:string = '';
@@ -31,7 +53,7 @@ class Store {
         return this.userList.find(item => !!item.active) || DEFAULT_USER;
     }
 
-    @action
+    @action.bound
     selectCurrentUser(id:string) {
         let userList = this.userList
 
@@ -46,10 +68,23 @@ class Store {
         this.userList = userList;
     }
 
-    @action
+    @action.bound
     changeSearchKey(text:string) {
         this.searchKeyword = text;
     }
-}
 
-export default Store;
+    @action.bound
+    sendMessage(text:string) {
+        let currentMessage = this.userMessageMap[this.currentUser.id];
+
+        if (currentMessage) {
+            let message = {
+                target: 'self',
+                time: String(new Date()),
+                text
+            }
+            currentMessage.list.push(message)
+            this.userMessageMap[this.currentUser.id] = currentMessage;
+        }
+    }
+}

@@ -28,7 +28,7 @@ export const userList = [
 
 export const userMessageMap = {
     '1': {
-        target: {
+        targetInfo: {
             id: '1',
             name: '咩咩咩',
             avatar: 'https://makapicture.oss-cn-beijing.aliyuncs.com/cdn/smc/release/aaa/屏幕快照 2019-08-30 下午5.18.49.png',
@@ -52,7 +52,7 @@ export const userMessageMap = {
         ]
     },
     '2': {
-        target: {
+        targetInfo: {
             id: '2',
             name: 'derick',
             avatar: 'https://makapicture.oss-cn-beijing.aliyuncs.com/cdn/smc/release/aaa/屏幕快照 2019-08-30 下午5.21.05.png'

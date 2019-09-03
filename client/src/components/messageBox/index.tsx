@@ -1,11 +1,9 @@
-import React from 'react'
-
+import React, {Component} from 'react'
+import { IUserMessageItem } from '../../store/mobxStore';
+import { observer } from 'mobx-react';
 
 interface MessageBoxProps {
-    message: {
-        target: object,
-        list: Array<userMessage>
-    }
+    message: IUserMessageItem
 }
 
 const MessageBoxItem: React.FC<{message: userMessage, target: any}> = ({target, message}) => {
@@ -25,14 +23,18 @@ const MessageBoxItem: React.FC<{message: userMessage, target: any}> = ({target, 
     )
 }
 
-const MessageBox: React.FC<MessageBoxProps> = ({message}) => {
-    return (
-        <div className="message">
-            <ul>
-                {message && message.list && message.list.map((item, idx) => <MessageBoxItem key={idx} message={item} target={message.target} />)}
-            </ul>
-        </div>
-    )
+@observer
+class MessageBox extends Component<MessageBoxProps> {
+    render() {
+        const {message} = this.props;
+        return (
+            <div className="message">
+                <ul>
+                    {message && message.list && message.list.map((item, idx) => <MessageBoxItem key={idx} message={item} target={message.targetInfo} />)}
+                </ul>
+            </div>
+        )
+    }
 }
 
 export default MessageBox;

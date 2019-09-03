@@ -4,29 +4,29 @@ import UserAvatar from '../../components/userAvatar'
 import UserList from '../../components/userList'
 import SearchInput from '../../components/searchInput'
 import MessageBox from '../../components/messageBox'
+import MessageTextArea from '../../components/messageTextArea'
 import { inject, observer } from 'mobx-react';
-import store from '../../store';
+import { IMobxStore } from '../../store/mobxStore';
 
-interface MainProps {
-    store: store
+interface storeProps {
+    mobxStore?: IMobxStore;
 }
 
+@inject('mobxStore')
 @observer
-export default class Main extends Component<MainProps> {
-    constructor(props: MainProps) {
-        super(props)
-    }
-
+export default class Main extends Component<storeProps> {
     handleSeachUserList(keyword: string) {
-        this.props.store.changeSearchKey(keyword);
+        const {changeSearchKey} = this.props.mobxStore!;
+        changeSearchKey(keyword);
     }
 
     handleSelectUser(id: string) {
-        this.props.store.selectCurrentUser(id);
+        const {selectCurrentUser} = this.props.mobxStore!;
+        selectCurrentUser(id);
     }
     
     render() {
-        const {currentUser, userMessageMap, user, filterUserList} = this.props.store;
+        const {currentUser, userMessageMap, user, filterUserList} = this.props.mobxStore!;
         const currentUserId = currentUser.id || '';
 
         const currentUserMessageMap = userMessageMap[currentUserId] || {};
@@ -48,9 +48,7 @@ export default class Main extends Component<MainProps> {
                 </div>
                 <div className="main">
                     <MessageBox message={currentUserMessageMap}/>
-                    <div className="text">
-                        <textarea id="textArea" placeholder="按 Ctrl + Enter 发送"></textarea>
-                    </div>
+                    <MessageTextArea />
                 </div>
             </div>
           );
