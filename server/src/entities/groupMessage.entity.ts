@@ -16,17 +16,14 @@ export class GroupMessage extends BaseEntity {
   @Column()
   from_user_id: number
 
-  @IsNotEmpty({ message: 'must include to_user_id' })
+  @IsNotEmpty({ message: 'must include group_id' })
   @Column()
-  to_user_id: number
+  group_id: number
 
   @IsNotEmpty({ message: 'must include message' })
   @Column()
   message: string
   
-  @Column()
-  sended_at: Date
-
   @Column()
   status: number
   
