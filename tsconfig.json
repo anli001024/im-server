@@ -15,13 +15,11 @@
         "resolveJsonModule": true,
         "baseUrl": ".",
         "paths": {
-            "client": ["client"],
-            "server": ["server"],
-            "server_configs": ["server/configs"],
-            "server_controllers": ["server/src/controllers"],
-            "entities": ["server/src/entities"]
+            "configs": ["configs"],
+            "controllers": ["src/controllers"],
+            "entities": ["src/entities"]
           }
     },
-    "include": ["server/**/*", "client/**/*", "utils/**/*", "types/**/*", "global.d.ts"],
+    "include": ["src/**/*", "utils/**/*", "build/**/*", "global.d.ts"],
     "exclude": ["node_modules"]
 }

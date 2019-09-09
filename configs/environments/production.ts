@@ -1,7 +1,7 @@
 export default {
-  identity: 'development',
+  identity: 'production',
   
-  port: 3000,
+  port: 3001,
   
   // Will be overwritten by the Env configuration of file "variables.env"
   mongo: {
@@ -11,5 +11,4 @@ export default {
     MONGODB_PASS: '',
     MONGODB_DATABASE: '',
   },
-  
 }
