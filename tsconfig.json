@@ -20,6 +20,6 @@
             "entities": ["src/entities"]
           }
     },
-    "include": ["src/**/*", "utils/**/*", "build/**/*", "global.d.ts"],
+    "include": ["src/**/*", "utils/**/*", "global.d.ts"],
     "exclude": ["node_modules"]
 }
